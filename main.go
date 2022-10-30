@@ -6,12 +6,17 @@ import (
 	"gin-restful-api-mysql/Models"
 	"gin-restful-api-mysql/Routes"
 	"github.com/jinzhu/gorm"
+	"github.com/joho/godotenv"
 )
 
 var err error
 
 func main() {
 	fmt.Println("Golang gin restful api mysql")
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
 	Config.DB, err = gorm.Open("mysql", Config.DBURL(Config.BuildDBConfig()))
 
 	if err != nil {
